@@ -36,3 +36,37 @@ before_action :authenticate_user!
 
 add to wecome_controller.rb
 skip_before_action :authenticate_user!, only: [:index]
+
+heroku sendgrid
+$ heroku addons:create sendgrid:starter
+
+heroku.com
+go to app name
+select sendgrid
+settings / credentials / add new credential
+
+$ heroku config:set SENDGRID_USERNAME=[username]
+$ heroku config:set SENDGRID_PASSWORD=[password]
+
+open .zshrc file (rood directory) and add
+export SENDGRID_USERNAME=name
+export SENDGRID_USERNAME=password
+
+add to config/envirnment.rb
+ActionMailer::Base.smtp_settings = {
+  :address => 'smtp.sendgrid.net',
+  :port => '587',
+  :authentication => :plain,
+  :user_name => ENV['SENDGRID_USERNAME'],
+  :password => ENV['SENDGRID_PASSWORD'],
+  :domain => 'heorku.com',
+  :enable_starttls_auto => true
+}
+
+add to config/envrironments/development.rb
+config.action_mailer.delivery_method = :test
+config.action_mailer.default_url_options = { :host => 'http://localhost:3000' } #development url
+
+add to config/envrionments/production.rb
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.default_url_options = { :host => 'herokuapp.com', :protocol => 'https' } #production url
