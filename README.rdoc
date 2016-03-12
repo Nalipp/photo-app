@@ -70,3 +70,6 @@ config.action_mailer.default_url_options = { :host => 'http://localhost:3000' } 
 add to config/envrionments/production.rb
 config.action_mailer.delivery_method = :smtp
 config.action_mailer.default_url_options = { :host => 'herokuapp.com', :protocol => 'https' } #production url
+
+heroku troubleshooting
+heroku restart -a <app name>  # app name is without .heroku.com
