@@ -73,3 +73,21 @@ config.action_mailer.default_url_options = { :host => 'herokuapp.com', :protocol
 
 heroku troubleshooting
 heroku restart -a <app name>  # app name is without .heroku.com
+
+STRIPE
+gem 'stripe'
+
+create config/initializers/stripe.rb
+Rails.configuration.stripe = {
+  :publishable_key => ENV['STRIPE_TEST_PUBLISHABLE_KEY'],
+  :secret_key => ENV['STRIPE_TEST_SECRET_KEY']
+} #see stripe documentation
+
+update .zshrc file
+export STRIPE_TEST_SECRET_KEY=yoursecrettestkeyfromstripe
+export STRIPE_TEST_PUBLISHABLE_KEY=yourpublishabletestkeyfromstripe
+close and re-open terminal window
+
+config heorku
+heroku config:set STRIPE_TEST_SECRET_KEY=yoursecrettestkey
+heroku config:set STRIPE_TEST_PUBLISHABLE_KEY=yourpublishabletestkey
